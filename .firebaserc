@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "sofa-store-with-redux"
+  }
+}

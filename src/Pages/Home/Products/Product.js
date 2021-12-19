@@ -17,7 +17,7 @@ const Product = ({ product }) => {
                     <CardMedia
                         component="img"
                         alt="green iguana"
-                        height="140"
+                        height="100%"
                         image={image}
                     />
                     <CardContent sx={{ textAlign: 'center' }}>
@@ -32,7 +32,7 @@ const Product = ({ product }) => {
                     <CardActions sx={{ justifyContent: 'center' }}>
                         <Rating name="read-only" value={rating} readOnly />
                     </CardActions>
-                    {/* <Box  sx={{}}> <Button sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} variant="outlined">ADD to Cart</Button></Box> */}
+
                     {/* <Button sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} variant="outlined">ADD to Cart</Button> */}
                 </Card>
             </Link>

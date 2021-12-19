@@ -50,7 +50,8 @@ const Navigation = () => {
         },
         sNav: {
             textDecoration: "none",
-            color: "#F37539"
+            color: "#F37539",
+            marginLeft: "10px"
         }
     })
 
@@ -85,6 +86,7 @@ const Navigation = () => {
 
                     <Box className={navItem}  >
                         <Link className={sNav} to="/home">Home</Link>
+                        <Link className={sNav} to="/products">Products</Link>
                         <Button color="inherit"><Button color="inherit">Login</Button></Button>
 
                         <Link className={sNav} to="/cart" ><AddShoppingCartIcon sx={{ fontSize: 'large' }} />

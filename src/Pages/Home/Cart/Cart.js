@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Box, CardContent, CardMedia, Grid, IconButton, Paper, Typography, Card, Divider } from '@mui/material';
+import { Box, CardContent, CardMedia, Grid, IconButton, Paper, Typography, Card, Divider, Button } from '@mui/material';
 import Navigation from '../../shared/Navigation/Navigation';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,9 +8,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { deleteProduct } from '../../../Redux/cartRedux';
 
 
 
@@ -18,7 +20,12 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 const Cart = () => {
     const cart = useSelector(state => state.cart)
-    console.log(cart.products)
+    const dispatch = useDispatch()
+
+    const handleDelete = (pd) => {
+
+        dispatch(deleteProduct(pd))
+    }
     const handleQuantity = () => {
 
     }
@@ -57,6 +64,8 @@ const Cart = () => {
                                             <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{pd.quantity}</span> <AddOutlinedIcon onClick={() => handleQuantity("inc")} />
                                         </Box>
                                         <Typography variant="h5" sx={{ marginTop: '20px' }}>${pd.quantity * pd.price}</Typography>
+
+                                        <Paper variant="outlined"> <DeleteForeverIcon onClick={() => handleDelete(pd)} fontSize="large" style={{ marginTop: "10px", marginLeft: '20px' }} /></Paper>
                                     </Box>
 
 
@@ -79,18 +88,22 @@ const Cart = () => {
                                         <TableRow>
 
                                             <TableCell >Subtotal</TableCell>
-                                            <TableCell align="right">{cart.total}</TableCell>
+                                            <TableCell align="right">${cart.total}</TableCell>
                                         </TableRow>
                                         <TableRow>
 
                                             <TableCell>Tax</TableCell>
-                                            <TableCell align="right">10</TableCell>
+                                            <TableCell align="right">$10</TableCell>
 
                                         </TableRow>
                                         <TableRow >
                                             <TableCell sx={{ fontWeight: "bold" }} >Total</TableCell>
-                                            <TableCell sx={{ fontWeight: "bold" }} align="right">{cart.total + 10}</TableCell>
+                                            <TableCell sx={{ fontWeight: "bold" }} align="right">${cart.total + 10}</TableCell>
                                         </TableRow>
+                                        <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
+                                            <Button variant="contained" sx={{ backgroundColor: " black", justifyContent: 'center', }}>PROCEED TO CHECKOUT</Button>
+                                        </Box>
+
                                     </TableBody>
                                 </Table>
                             </TableContainer>

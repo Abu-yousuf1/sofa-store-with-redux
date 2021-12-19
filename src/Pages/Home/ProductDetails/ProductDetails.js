@@ -26,7 +26,7 @@ const ProductDetails = () => {
         }
     }
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${id}`)
+        fetch(`https://still-journey-43964.herokuapp.com/products/${id}`)
             .then(res => res.json())
             .then(data => setProduct(data))
     }, [])
@@ -52,8 +52,8 @@ const ProductDetails = () => {
                         <Typography variant="h4">${product.price}</Typography>
                         <br />
                         <Typography variant="body3" sx={{ color: "secondary" }}>{product.description}</Typography>
-                        <br />
-                        <Box >
+
+                        <Box style={{ marginTop: "20px" }} >
                             <RemoveCircleIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{quantity}</span> <AddCircleIcon onClick={() => handleQuantity("inc")} />
                         </Box>
                         <Button onClick={handleClick} sx={{ backgroundColor: "#F37539", color: "black", marginTop: "20px" }} variant="outlined">ADD to Cart</Button>

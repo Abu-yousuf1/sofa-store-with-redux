@@ -76,7 +76,7 @@ const Products = () => {
 
     // console.log(sofa)
     useEffect(() => {
-        fetch('http://localhost:5000/products')
+        fetch('https://still-journey-43964.herokuapp.com/products')
             .then(res => res.json())
             .then(data => setSofa(data))
     }, [])
