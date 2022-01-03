@@ -57,8 +57,8 @@ const Navigation = () => {
 
     const { nav, navItem, navIcon, navLogo, cartIconText, sNav } = styleNav()
 
-    const quantity = useSelector(state => state.cart.quantity)
-    console.log(quantity)
+    const cart = useSelector(state => state.cart.cart)
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" className={nav}>
@@ -87,10 +87,11 @@ const Navigation = () => {
                     <Box className={navItem}  >
                         <Link className={sNav} to="/home">Home</Link>
                         <Link className={sNav} to="/products">Products</Link>
-                        <Button color="inherit"><Button color="inherit">Login</Button></Button>
+                        <Link className={sNav} to="/login">Login</Link>
+                        {/* <Button color="inherit"><Button color="inherit">Login</Button></Button> */}
 
                         <Link className={sNav} to="/cart" ><AddShoppingCartIcon sx={{ fontSize: 'large' }} />
-                            <Typography variant="h6" className={cartIconText}>{quantity}</Typography></Link>
+                            <Typography variant="h6" className={cartIconText}>{cart.length}</Typography></Link>
 
                     </Box>
 

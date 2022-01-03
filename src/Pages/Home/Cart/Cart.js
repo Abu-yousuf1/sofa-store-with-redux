@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, CardContent, CardMedia, Grid, IconButton, Paper, Typography, Card, Divider, Button } from '@mui/material';
 import Navigation from '../../shared/Navigation/Navigation';
 import Table from '@mui/material/Table';
@@ -13,14 +13,29 @@ import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { deleteProduct } from '../../../Redux/cartRedux';
+import { ConnectingAirportsOutlined } from '@mui/icons-material';
 
 
 
 
 
 const Cart = () => {
-    const cart = useSelector(state => state.cart)
+
+    const cart = useSelector(state => state.cart.cart)
+
+    const subTotal = cart.reduce((a, b) => a + b.price * b.quantity, 0);
     const dispatch = useDispatch()
+
+    let text;
+    let shipping;
+    if (subTotal > 0) {
+        text = 10
+    }
+
+
+    let total = parseInt(subTotal + text)
+    total = total ? total : 0
+    text = text ? text : 0
 
     const handleDelete = (pd) => {
 
@@ -29,6 +44,7 @@ const Cart = () => {
     const handleQuantity = () => {
 
     }
+
     return (
         <Box>
             <Navigation />
@@ -37,7 +53,7 @@ const Cart = () => {
                 <Grid container spacing={2} style={{ marginTop: '50px' }}>
 
                     <Grid item xs={12} md={8}>
-                        {cart.products.map(pd =>
+                        {cart.map(pd =>
                             <Box style={{ borderBottom: "1px solid gray", marginBottom: '15px' }}>
                                 <Card sx={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <Box sx={{ display: 'flex' }}>
@@ -63,17 +79,13 @@ const Cart = () => {
                                         <Box >
                                             <RemoveOutlinedIcon onClick={() => handleQuantity("dec")} /><span style={{ border: '1px solid gray', padding: '0 6px', fontWeight: "bold", position: 'relative', bottom: '8px', margin: '0 5px' }}>{pd.quantity}</span> <AddOutlinedIcon onClick={() => handleQuantity("inc")} />
                                         </Box>
+
                                         <Typography variant="h5" sx={{ marginTop: '20px' }}>${pd.quantity * pd.price}</Typography>
 
-                                        <Paper variant="outlined"> <DeleteForeverIcon onClick={() => handleDelete(pd)} fontSize="large" style={{ marginTop: "10px", marginLeft: '20px' }} /></Paper>
+                                        <Button onClick={() => handleDelete(pd)} variant="contained" color="error" sx={{ margin: '10px 0 0 0' }}>REMOVE</Button>
                                     </Box>
-
-
                                 </Card>
-
                             </Box>
-
-
                         )}
 
                     </Grid>
@@ -88,17 +100,19 @@ const Cart = () => {
                                         <TableRow>
 
                                             <TableCell >Subtotal</TableCell>
-                                            <TableCell align="right">${cart.total}</TableCell>
+                                            <TableCell align="right">${subTotal}</TableCell>
                                         </TableRow>
                                         <TableRow>
 
                                             <TableCell>Tax</TableCell>
-                                            <TableCell align="right">$10</TableCell>
+                                            <TableCell align="right">${text}</TableCell>
+
 
                                         </TableRow>
+
                                         <TableRow >
                                             <TableCell sx={{ fontWeight: "bold" }} >Total</TableCell>
-                                            <TableCell sx={{ fontWeight: "bold" }} align="right">${cart.total + 10}</TableCell>
+                                            <TableCell sx={{ fontWeight: "bold" }} align="right">${parseInt(total)}</TableCell>
                                         </TableRow>
                                         <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
                                             <Button variant="contained" sx={{ backgroundColor: " black", justifyContent: 'center', }}>PROCEED TO CHECKOUT</Button>

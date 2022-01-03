@@ -25,6 +25,8 @@ const ProductDetails = () => {
             setQuantity(quantity + 1)
         }
     }
+   
+
     useEffect(() => {
         fetch(`https://still-journey-43964.herokuapp.com/products/${id}`)
             .then(res => res.json())
@@ -64,5 +66,6 @@ const ProductDetails = () => {
         </Box>
     );
 };
+
 
 export default ProductDetails;

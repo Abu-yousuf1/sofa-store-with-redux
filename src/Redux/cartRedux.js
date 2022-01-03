@@ -4,47 +4,37 @@ import swal from 'sweetalert';
 const cartSlice = createSlice({
     name: "cart",
     initialState: {
-        products: [],
-        quantity: 0,
+        cart: [],
         total: 0,
     },
     reducers: {
         addProduct: (state, action) => {
 
-            if (state.quantity === 0) {
-                state.quantity += 1;
-                state.products.push(action.payload);
-                state.total += action.payload.price * action.payload.quantity;
-            }
-            else if (state.quantity !== 0) {
-                for (const pd of state.products) {
+            const restCart = [...state.cart, action.payload];
+            console.log(restCart)
+            const arrayUniqueByKey = [
 
-                    if (pd._id !== action.payload._id) {
-                        state.quantity += 1;
-                        state.products.push(action.payload);
-                        state.total += action.payload.price * action.payload.quantity;
-                        break;
-                    }
-                    else if (pd._id === action.payload_id) {
-                        swal({
-                            icon: "warning",
-                        });
-                        break;
+                ...new Map(restCart.map((item) => [item["_id"], item])).values(),
+            ];
 
-                    }
+            state.cart = arrayUniqueByKey
 
-                }
-
-            }
 
 
         },
         deleteProduct: (state, action) => {
             console.log('payload', action.payload)
-            state.products = state.products.filter(pd => pd._id !== action.payload._id)
-            state.quantity -= 1
-            state.total -= action.payload.price * action.payload.quantity
-        }
+            state.cart = state.cart.filter(pd => pd._id !== action.payload._id)
+        },
+        // updateQuantity:(state,{payload})=>{
+        //     if (payload === "dec") {
+        //         state.quantity > 1 && setQuantity(quantity - 1)
+        //     }
+        //     else {
+        //         setQuantity(quantity + 1)
+        //     }
+        // }
+
     }
 })
 
