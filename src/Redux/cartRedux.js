@@ -2,13 +2,17 @@ import { createSlice } from '@reduxjs/toolkit'
 import swal from 'sweetalert';
 
 const cartSlice = createSlice({
-    name: "cart",
+    name: "product",
     initialState: {
+        product: [],
         cart: [],
         total: 0,
     },
     reducers: {
-        addProduct: (state, action) => {
+        addToProduct: (state, action) => {
+            state.product = action.payload;
+        },
+        addToCart: (state, action) => {
 
             const restCart = [...state.cart, action.payload];
             console.log(restCart)
@@ -19,13 +23,18 @@ const cartSlice = createSlice({
 
             state.cart = arrayUniqueByKey
 
-
-
         },
         deleteProduct: (state, action) => {
             console.log('payload', action.payload)
             state.cart = state.cart.filter(pd => pd._id !== action.payload._id)
         },
+        addTotal: (state, action) => {
+            state.total = action.payload;
+        },
+        clearCart: (state, action) => {
+            state.cart = action.payload;
+        }
+
         // updateQuantity:(state,{payload})=>{
         //     if (payload === "dec") {
         //         state.quantity > 1 && setQuantity(quantity - 1)
@@ -38,6 +47,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const { addProduct, deleteProduct } = cartSlice.actions;
+export const { addToCart, deleteProduct, addToProduct, addTotal, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

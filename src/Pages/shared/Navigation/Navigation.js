@@ -11,6 +11,7 @@ import { CardMedia, useTheme } from '@mui/material';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import useAuth from '../../../hook/useAuth';
 
 const Navigation = () => {
     const theme = useTheme()
@@ -56,9 +57,9 @@ const Navigation = () => {
     })
 
     const { nav, navItem, navIcon, navLogo, cartIconText, sNav } = styleNav()
-
+    const { user, logOut } = useAuth();
     const cart = useSelector(state => state.cart.cart)
-
+    console.log(user.displayName, "jink")
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed" className={nav}>
@@ -87,7 +88,15 @@ const Navigation = () => {
                     <Box className={navItem}  >
                         <Link className={sNav} to="/home">Home</Link>
                         <Link className={sNav} to="/products">Products</Link>
-                        <Link className={sNav} to="/login">Login</Link>
+                        {user.email ? <Button color="inherit" className={sNav} sx={{ fontWeight: 'bold' }} onClick={logOut} >Log-Out</Button>
+                            : <Link className={sNav} to="/login">Login</Link>
+                        }
+                        {
+                            user.email && <Typography variant="body3">{user.displayName}</Typography>
+                        }
+                        {
+                            user.email && <Link className={sNav} to="/dashboard">Dashboard</Link>
+                        }
                         {/* <Button color="inherit"><Button color="inherit">Login</Button></Button> */}
 
                         <Link className={sNav} to="/cart" ><AddShoppingCartIcon sx={{ fontSize: 'large' }} />

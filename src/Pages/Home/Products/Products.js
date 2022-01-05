@@ -1,7 +1,10 @@
-import { AppBar, Box, Button, Typography, Toolbar, Container, Grid } from '@mui/material';
+import { AppBar, Box, Button, Typography, Toolbar, Container, Grid, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hook/useAuth';
+import { addToProduct } from '../../../Redux/cartRedux';
 import Product from './Product';
 
 // const sofa = [
@@ -72,13 +75,19 @@ import Product from './Product';
 // ]
 
 const Products = () => {
+    const { isLoading } = useAuth()
     const [sofa, setSofa] = useState([])
-
+    const dispatch = useDispatch();
     // console.log(sofa)
     useEffect(() => {
         fetch('https://still-journey-43964.herokuapp.com/products')
             .then(res => res.json())
-            .then(data => setSofa(data))
+            .then(data => {
+                const newData = data.sort((a, b) => 0.5 - Math.random());
+                setSofa(newData)
+                dispatch(addToProduct(data));
+
+            })
     }, [])
 
     const style = makeStyles({
@@ -91,7 +100,9 @@ const Products = () => {
     const { nav } = style()
     return (
         <Container>
-            <Box style={{ marginTop: '50px' }}>
+            {isLoading ? <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 15 }}>
+                <CircularProgress />
+            </Box> : <Box style={{ marginTop: '50px' }}>
                 <Typography variant="h4" className="primary-color" sx={{ textAlign: 'center', fontWeight: 'medium' }}>PRODUCTS</Typography>
 
                 {/* <Box style={{ marginTop: '50px' }} >
@@ -114,7 +125,7 @@ const Products = () => {
 
                     </Grid>
                 </Box>
-            </Box>
+            </Box>}
 
         </Container>
     );

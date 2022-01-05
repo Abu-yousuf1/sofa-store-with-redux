@@ -1,11 +1,13 @@
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
+import useAuth from "../../../hook/useAuth";
 import Footer from "../../shared/Footer/Footer";
 import Navigation from "../../shared/Navigation/Navigation";
-// import useAuth from "../../../Hooks/useAuth";
+
 
 const Login = () => {
-    // const { loginWithGoogle, login } = useAuth();
+    const { loginWithEmail } = useAuth();
     const [loginData, setLoginData] = useState({});
 
     const handleOnBlur = (e) => {
@@ -18,8 +20,8 @@ const Login = () => {
 
     const handleLoginSubmit = (e) => {
         // Login functionality here
-        console.log(loginData);
-        // login(loginData);
+
+        loginWithEmail(loginData.email, loginData.password);
         e.preventDefault();
     };
     return (
@@ -59,12 +61,13 @@ const Login = () => {
                             >
                                 Login
                             </Button>
+
                         </form>
-                        {/* <NavLink style={{textDecoration: 'none', fontWeight: 600}} to="/register">
-                        New User? Please Register
-                    </NavLink> */}
+                        <NavLink style={{ textDecoration: 'none', fontWeight: 600 }} to="/registration">
+                            New User? Please Register
+                        </NavLink>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6}>
+                    <Grid item xs={12} sm={12} md={6} sx={{ display: { sm: 'none' } }}>
                         <img
                             width="90%"
                             height="500px"
@@ -73,9 +76,7 @@ const Login = () => {
                         />
                     </Grid>
                 </Grid>
-                <Box>
-                    <Typography variant="h6" >Don't have an account?Please sign up.</Typography>
-                </Box>
+
             </Container>
             <Footer />
         </Box>
