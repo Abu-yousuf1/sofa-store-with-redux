@@ -17,7 +17,7 @@ const MyOrder = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders?email=${user.email}`)
+        fetch(`https://still-journey-43964.herokuapp.com/orders?email=${user.email}`)
             .then((res) => res.json())
             .then((data) => {
                 setOrders(data)
@@ -29,7 +29,7 @@ const MyOrder = () => {
         const isDelete = window.confirm("Are You Sure to Delete?");
         if (isDelete) {
             fetch(
-                `http://localhost:5000/order/${id}`,
+                `https://still-journey-43964.herokuapp.com/order/${id}`,
                 {
                     method: "DELETE",
                 }
