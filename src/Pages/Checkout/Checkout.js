@@ -36,7 +36,7 @@ const Checkout = () => {
                 console.log(data)
                 reset(data)
                 dispatch(clearCart([]))
-                swal("Good job!", "Congratulations you are successfully Purchase!", "success")
+                swal("Good job!", "Congratulations you are successfully Purchased!", "success")
                 setTimeout(function () {
                     navigate('/')
                 }, 1000)
