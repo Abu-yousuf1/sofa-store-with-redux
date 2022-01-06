@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux';
 const Products = () => {
     const { isLoading } = useAuth()
 
+
     const sofa = useSelector((state) => state.cart.product)
 
     const style = makeStyles({

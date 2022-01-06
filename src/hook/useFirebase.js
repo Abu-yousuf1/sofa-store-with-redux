@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import initializeFirebase from "../firebase/firebase.init"
 import { getAuth, signOut, updateProfile, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 initializeFirebase()
 
@@ -9,6 +10,7 @@ const useFirebase = () => {
     const [user, setUser] = useState({})
     const [err, setErr] = useState('')
     const [isLoading, setIsLoading] = useState(true)
+    const navigate = useNavigate()
 
     const auth = getAuth()
     // create with email and password account...........
@@ -21,7 +23,10 @@ const useFirebase = () => {
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
-
+                    swal("Good job!", "Congratulations you are successfully sign up!", "success")
+                    setTimeout(function () {
+                        navigate('/')
+                    }, 1000)
                 })
             }).catch((error) => {
                 setErr(error.message)
@@ -29,9 +34,15 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false))
     }
     // login with email and password.................. 
-    const loginWithEmail = (email, password) => {
+    const loginWithEmail = (email, password, location) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((result) => {
+                swal("Good job!", "Congratulations you are successfully sign in!", "success")
+                setTimeout(function () {
+                    const destination = location?.state?.from || "/"
+                    navigate(destination)
+                }, 1000)
+
                 const user = result.user
                 setErr('')
                 setUser(user)
@@ -42,13 +53,36 @@ const useFirebase = () => {
     }
     // logout......................
     const logOut = () => {
-
-        signOut(auth).then(() => {
-            setErr("")
-        }).catch((error) => {
-            setErr(error.message)
+        swal({
+            title: "Are you sure?",
+            text: "You went to log Out!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
-            .finally(() => setIsLoading(false))
+            .then((willDelete) => {
+                if (willDelete) {
+                    swal("Poof! Your are successfully log Out!", {
+                        icon: "success",
+                    });
+
+                    signOut(auth)
+                        .then(() => {
+                            setErr("")
+                            navigate('/')
+                        })
+                        .catch((error) => {
+                            setErr(error.message)
+                        })
+                        .finally(() => setIsLoading(false))
+
+                } else {
+                    swal("Welcome to again!");
+
+                }
+            })
+
+
 
     }
 

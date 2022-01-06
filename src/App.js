@@ -14,6 +14,7 @@ import Registration from './Pages/Authentication/Registration/Registration';
 import Checkout from './Pages/Checkout/Checkout';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import MyOrder from './Pages/Dashboard/MyOrders/MyOrder';
+import PrivateRoute from './Pages/Authentication/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -26,9 +27,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
           <Route path='/products/:id' element={<ProductDetails />} />
-          <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}>
             <Route path="/dashboard" element={<MyOrder />} />
           </Route>
         </Routes>

@@ -75,8 +75,9 @@ import Product from './Product';
 // ]
 
 const Products = () => {
-    const { isLoading } = useAuth()
+    // const { isLoading } = useAuth()
     const [sofa, setSofa] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch();
     // console.log(sofa)
     useEffect(() => {
@@ -85,6 +86,7 @@ const Products = () => {
             .then(data => {
                 const newData = data.sort((a, b) => 0.5 - Math.random());
                 setSofa(newData)
+                setIsLoading(false)
                 dispatch(addToProduct(data));
 
             })

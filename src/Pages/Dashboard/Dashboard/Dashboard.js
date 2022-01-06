@@ -18,11 +18,13 @@ import Typography from '@mui/material/Typography';
 import { Link, Outlet } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import GridViewIcon from '@mui/icons-material/GridView';
-import MyOrder from './../MyOrders/MyOrder';
+import LogoutIcon from '@mui/icons-material/Logout';
+import useAuth from '../../../hook/useAuth';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
+    const { logOut } = useAuth()
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -38,6 +40,7 @@ function Dashboard(props) {
             <br />
             <List><Link to="/home" style={{ textDecoration: "none", color: "#F37539", fontWeight: 'bold', margin: "10px" }} > <HomeIcon sx={{ fontSize: 20, marginBottom: '-4px' }} /> Home</Link></List>
             <List> <Link to="/dashboard" style={{ textDecoration: "none", color: "#F37539", fontWeight: 'bold', margin: "10px" }} > <GridViewIcon sx={{ fontSize: 20, margin: '6px 10px -5px 0' }} />MyOrders</Link></List>
+            <List> <Typography variant="body3" onClick={logOut} style={{ textDecoration: "none", color: "#F37539", fontWeight: 'bold', margin: "10px" }} > <LogoutIcon sx={{ fontSize: 20, margin: '6px 10px -5px 0' }} />LogOut</Typography></List>
 
         </div>
     );

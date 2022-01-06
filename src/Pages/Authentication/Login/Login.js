@@ -1,6 +1,6 @@
 import { Box, Button, Container, Grid, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import useAuth from "../../../hook/useAuth";
 import Footer from "../../shared/Footer/Footer";
 import Navigation from "../../shared/Navigation/Navigation";
@@ -9,6 +9,7 @@ import Navigation from "../../shared/Navigation/Navigation";
 const Login = () => {
     const { loginWithEmail } = useAuth();
     const [loginData, setLoginData] = useState({});
+    const location = useLocation()
 
     const handleOnBlur = (e) => {
         const field = e.target.name;
@@ -21,7 +22,7 @@ const Login = () => {
     const handleLoginSubmit = (e) => {
         // Login functionality here
 
-        loginWithEmail(loginData.email, loginData.password);
+        loginWithEmail(loginData.email, loginData.password, location);
         e.preventDefault();
     };
     return (

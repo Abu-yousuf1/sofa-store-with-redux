@@ -118,7 +118,7 @@ const Cart = () => {
                                             <TableRow>
 
                                                 <TableCell >Subtotal</TableCell>
-                                                <TableCell align="right">${subTotal}</TableCell>
+                                                <TableCell align="right">${subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
                                             </TableRow>
                                             <TableRow>
 
@@ -130,7 +130,7 @@ const Cart = () => {
 
                                             <TableRow >
                                                 <TableCell sx={{ fontWeight: "bold" }} >Total</TableCell>
-                                                <TableCell sx={{ fontWeight: "bold" }} align="right">${parseInt(total)}</TableCell>
+                                                <TableCell sx={{ fontWeight: "bold" }} align="right">${parseInt(total).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</TableCell>
                                             </TableRow>
                                             <Box sx={{ justifyContent: 'center', marginTop: "30px", marginLeft: "110px" }}>
                                                 <Link to="/checkout" style={{ textDecoration: 'none' }}> <Button onClick={handleProceed} variant="contained" sx={{ justifyContent: 'center', backgroundColor: '#F37539 ', }}>PROCEED TO CHECKOUT</Button></Link>
