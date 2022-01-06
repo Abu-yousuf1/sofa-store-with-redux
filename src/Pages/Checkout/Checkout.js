@@ -8,6 +8,7 @@ import './checkout.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../../Redux/cartRedux'
 import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Checkout = () => {
     const { user } = useAuth();
@@ -23,7 +24,7 @@ const Checkout = () => {
         data.cart = cart.cart
         console.log(data, "kld");
 
-        fetch('http://localhost:5000/order', {
+        fetch('https://still-journey-43964.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -35,7 +36,11 @@ const Checkout = () => {
                 console.log(data)
                 reset(data)
                 dispatch(clearCart([]))
-                navigate('/')
+                swal("Good job!", "Congratulations you are successfully Purchase!", "success")
+                setTimeout(function () {
+                    navigate('/')
+                }, 1000)
+
             })
 
     }
