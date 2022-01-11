@@ -21,7 +21,7 @@ const CheckoutForm = ({ order }) => {
     const navigate = useNavigate()
     const { user } = useAuth()
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://still-journey-43964.herokuapp.com/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
