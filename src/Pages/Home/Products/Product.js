@@ -85,11 +85,12 @@ const Product = ({ product }) => {
                 <CardActions sx={{ justifyContent: "center" }}>
                     <div className="addCard">
                         <Button
+                            style={{ backgroundColor: '#F37539' }}
                             variant="contained"
                             onClick={() => handleClick(product)}
                         >
                             {" "}
-                            <AddShoppingCartIcon sx={{ marginRight: "15px" }} />
+                            <AddShoppingCartIcon sx={{ marginRight: "15px", }} />
                             ADD TO CART
                         </Button>
                     </div>

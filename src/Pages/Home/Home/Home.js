@@ -1,4 +1,5 @@
 import React from 'react';
+import About from '../../shared/About/About';
 import Footer from '../../shared/Footer/Footer';
 import Navigation from '../../shared/Navigation/Navigation';
 import Banner from '../Banner/Banner';
@@ -12,6 +13,8 @@ const Home = () => {
             <Banner />
             <SubBanner />
             <Products />
+            <About />
+
             <Footer />
         </div>
     );

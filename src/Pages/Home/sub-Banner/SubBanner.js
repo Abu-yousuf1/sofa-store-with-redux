@@ -11,17 +11,17 @@ const SubBanner = () => {
     return (
         <>
             <Grid container >
-                <Grid item xs={6} md={6} >
+                <Grid item xs={12} md={6} >
                     <img style={{ width: '100%', height: '100%' }} src={banner1} alt="" />
                 </Grid>
-                <Grid item xs={3} md={3} >
+                <Grid item xs={6} md={3} >
 
                     <img style={{ width: '100%', height: '50%', }} src={banner2} alt="" />
 
                     <img style={{ width: '100%', height: '50%', }} src={banner3} alt="" />
 
                 </Grid>
-                <Grid item xs={3} md={3}>
+                <Grid item xs={6} md={3}>
                     <img style={{ width: '100%', height: '100%' }} src={banner4} alt="" />
                 </Grid>
 

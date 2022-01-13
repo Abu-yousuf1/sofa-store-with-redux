@@ -68,7 +68,7 @@ const Login = () => {
                             New User? Please Register
                         </NavLink>
                     </Grid>
-                    <Grid item xs={12} sm={12} md={6} sx={{ display: { sm: 'none' } }}>
+                    <Grid item xs={12} sm={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
                         <img
                             width="90%"
                             height="500px"
